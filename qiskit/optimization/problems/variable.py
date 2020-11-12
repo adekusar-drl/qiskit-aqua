@@ -143,3 +143,16 @@ class Variable(QuadraticProgramElement):
             variable type.
         """
         return self.name, self.lowerbound, self.upperbound, self.vartype
+
+    def __str__(self) -> str:
+        type_str = "?"
+        bounds = ""
+        if self.vartype == VarType.CONTINUOUS:
+            type_str = "continuous"
+            bounds = "[" + str(self._lowerbound) + ", " + str(self._upperbound) + "]"
+        elif self.vartype == VarType.INTEGER:
+            type_str = "integer"
+            bounds = "[" + str(self._lowerbound) + ", " + str(self._upperbound) + "]"
+        elif self.vartype == VarType.BINARY:
+            type_str = "binary"
+        return self._name + ": " + type_str + bounds
